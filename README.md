@@ -1,19 +1,96 @@
-# 🎈 Blank app template
+# 📊 Smart Portfolio Builder v5 — Pro Edition
 
-A simple Streamlit app template for you to modify!
+전체 시장 분석 + 강화된 개인 재무관리 + 숨은 가치주 발굴
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+## ✨ v5 주요 변경사항
 
-### How to run it on your own machine
+| 기능 | v4 | v5 |
+|------|----|-----|
+| 미국 종목 | 50개 (S&P) | **170개** (S&P 100 + NASDAQ 70) |
+| 한국 종목 | 30개 (KOSPI) | **150개** (KOSPI 100 + KOSDAQ 50) |
+| 덴마크 종목 | 25개 | 25개 |
+| **통합 시 총** | 105개 | **~345개** |
+| 재무관리 | 기본 | 💪 **재무 건강도 점수 + 5가지 영역 분석** |
+| 숨은 가치주 | ❌ | 💎 **저평가 + 미래 상승 발굴 알고리즘 (신규!)** |
 
-1. Install the requirements
+## 🚀 실행
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+streamlit run quant_portfolio_app.py
+```
 
-2. Run the app
+⏱️ 통합 시장 분석은 **약 7~10분** 걸립니다. 한 번 실행 후 캐시되어 다음부터는 빠릅니다.
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+## 💎 숨은 가치주 발굴 (Hidden Gems)
+
+**4가지 신호 결합 알고리즘**:
+
+| 신호 | 가중치 | 내용 |
+|------|------|------|
+| 💰 가치 | 35% | 낮은 PER·PBR + 가치 함정 회피 (PER<5 페널티) |
+| 💎 품질 | 25% | ROE, 부채비율, 이익률 |
+| 🔄 회복 | 20% | 3개월 모멘텀 > 12개월 모멘텀 (turnaround 신호) |
+| 📈 성장 | 20% | 매출 성장, 이익 성장 |
+
+**시장 전체 ~345개**에서 가치 함정을 피하면서 **저평가 + 회복 중인 우량주**를 자동 발굴합니다.
+
+## 💰 재무 건강도 평가
+
+5가지 영역을 종합해 A~F 등급:
+
+1. **저축률** (25%) — 월급 대비 저축 비율
+2. **비상금** (20%) — 월 지출 몇 개월치
+3. **부채소득비율** (20%) — 부채 부담 정도
+4. **은퇴 준비도** (20%) — 4% Rule 기준 달성률
+5. **투자 비중** (15%) — 총자산 중 투자 자산
+
+각 항목별 **개선 권장 사항**도 자동 생성됩니다.
+
+## 🌏 시장 옵션
+
+| 옵션 | 종목 수 | 분석 시간 |
+|------|--------|---------|
+| 🇺🇸 미국 (S&P + NASDAQ) | 170개 | ~3분 |
+| 🇰🇷 한국 (KOSPI + KOSDAQ) | 150개 | ~3분 |
+| 🇩🇰 덴마크 (OMX) | 25개 | ~30초 |
+| 🌍 전체 | 345개 | **~7-10분** |
+| ✨ 추천 시장 (자동) | 매크로 분석 후 선택 | 자동 시장의 종목 수에 따라 |
+
+## ⚠️ 솔직한 한계
+
+1. **KOSDAQ 데이터 품질** — yfinance가 KOSDAQ 중소형주 펀더멘털을 잘 못 가져옵니다. 일부 종목은 자동 제외돼요.
+2. **NASDAQ 일부 종목** — SPAC, 신규 상장주 등은 데이터 부족할 수 있습니다.
+3. **숨은 가치주는 양적 신호만** — 회사 자체 문제(소송, 회계 부정 등)는 발견 못 합니다. **반드시 사업보고서 확인** 후 결정하세요.
+4. **시간이 좀 걸립니다** — 첫 실행 7~10분. 그래도 1.5시간짜리 진짜 전체 시장보단 훨씬 실용적.
+
+## 📚 학술적 근거
+
+| 기능 | 근거 |
+|------|------|
+| Deep Value | Graham & Dodd (1934), Fama & French (1992) |
+| Quality factor | Novy-Marx (2013) |
+| Turnaround momentum | DeBondt & Thaler (1985) reversal effect |
+| Growth signals | Sloan (1996) accruals literature |
+| 4% Rule | Bengen (1994), Trinity Study (1998) |
+| 50/30/20 rule | Elizabeth Warren의 *All Your Worth* |
+| Mean-Variance | Markowitz (1952), Nobel 1990 |
+
+## 🎯 Finance Manager 면접 관점
+
+v5의 어필 포인트:
+1. **풀스택 분석가 능력**: UI + 데이터 + 알고리즘 + 재무 도메인
+2. **개인 재무 + 투자 통합**: corporate finance의 본질
+3. **Hidden Gems 알고리즘**: 단순 스크리닝을 넘어선 다중 신호 결합
+4. **국제 분산**: 한·미·덴마크 동시 분석
+5. **세금 인식**: 국적별 세금 자동 적용
+
+## 📁 파일 구조
+
+```
+quant/
+├── quant_portfolio_app.py   # 메인 앱 (2,419줄)
+├── requirements.txt          # 패키지
+├── README.md                # 이 파일
+└── user_data.json           # 자동 생성됨
+```
